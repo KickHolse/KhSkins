@@ -1,0 +1,19 @@
+menu:
+  title: 'Skins'
+  replaces:
+    select: '&eClique para selecionar este kit!'
+  items:
+    select:
+      slot: 48
+      execute: 'SELECT>chat'
+      icon: 'item>BOOK_AND_QUILL : nome>&eEscolher uma nova skin : desc>&7Você pode escolher uma nova skin\n&7para ser utilizada em sua conta.\n\n&fComando &7/skin [nick]\n\n&aClique para escolher.'
+    update:
+      slot: 49
+      execute: 'SKIN>update'
+      icon: 'item>BARRIER : nome>&eAtualizar skin : desc>&7Isso irá restaurar a sua skin para a\n&7skin utilizada em sua conta do Minecraft.\n&7Caso você não possua uma conta, ficará\n&7com a skin padrão de nossa rede.\n\n&fComando: &7/skin atualizar\n\n&aClique para atualizar.'
+    help:
+      slot: 50
+      execute: 'SKIN>help'
+      ownerid: '11d8b86f-8c1c-4a47-bc34-26dba4640a5c'
+      value: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzY0MTY4MmY0MzYwNmM1YzlhZDI2YmM3ZWE4YTMwZWU0NzU0N2M5ZGZkM2M2Y2RhNDllMWMxYTI4MTZjZjBiYSJ9fX0='
+      icon: 'item>HEAD:nbt={value} : nome>&eAjuda : desc>&7As ações disponíveis neste menu\n&7também podem ser realizadas por\n&7comando.\n\n&fComando: &7/skin ajuda\n\n&aClique para listar os comandos.'
