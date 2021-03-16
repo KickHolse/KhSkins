@@ -11,7 +11,7 @@
 # ─────────────────────────────────────────────────── #
 options:
 #	Nome: KhSkins | Autor: Kick Holse
-	version: 1.0
+	version: 1.1
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── #
 # events
 join:
@@ -53,7 +53,7 @@ command skin [<text>]:
 			close player's inventory
 			send yaml value "messages.command.skin.updated" from "khskins.language"
 			make console execute command "sr set %player% %player%"
-			set yaml value "%uuid of player%.selected" of file "plugins/KhSkins/players/%player%.yml" to uuid of player
+			set yaml value "%uuid of player%.selected" of file "plugins/KhSkins/players/%player%.yml" to player's displayname
 		else if khskins_verifyPlayer(arg 1 parsed as offlineplayer) is true:
 			set {_player} to khskins_getPlayerName(arg 1 parsed as offlineplayer) parsed as offlineplayer
 			set {_x} to yaml value "messages.command.skin.change" from "khskins.language"
@@ -62,9 +62,9 @@ command skin [<text>]:
 			replace "{nick}" with "%{_player}%" in {_x}
 			send {_x}
 			make console execute command "sr set %player% %{_player}%"
-			set yaml value "%uuid of player%.selected" of file "plugins/KhSkins/players/%player%.yml" to uuid of {_player}
-			khcore_listContains(yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%player%.yml", uuid of {_player}) is not true:
-				add uuid of {_player} to yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%player%.yml"
+			set yaml value "%uuid of player%.selected" of file "plugins/KhSkins/players/%player%.yml" to "%{_player}%"
+			khcore_listContains(yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%player%.yml", "%{_player}%") is not true:
+				add "%{_player}%" to yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%player%.yml"
 		else:
 			send yaml value "messages.command.skin.not_found" from "khskins.language"
 		
@@ -98,24 +98,23 @@ function khskins_paggedMenu(p: player, var: objects, page: number = 0):
 			khskins_ext({_p}, {_cmd})
 	loop {_var::*}:
 		(loop-index parsed as integer) > {_pageStart}
-		set {_loop} to loop-value
-		set {_name} to "%loop-value%" parsed as offlineplayer
-		set {_lore} to replacer "{nick}" with "%{_name}%" in yaml value "menu.lore" from "khskins.language"
-		{_loop} is not uuid of {_p}:
+		set {_loop} to loop-value parsed as offlineplayer
+		set {_lore} to replacer "{nick}" with "%{_loop}%" in yaml value "menu.lore" from "khskins.language"
+		{_loop} is not {_p}' displayname:
 			replace "{right-click}" with yaml value "menu.replaces.right-click" from "khskins.language" in {_lore}
 		yml value "%uuid of {_p}%.selected" from file "plugins/KhSkins/players/%{_p}%.yml" is loop-value:
 			replace "{state}" with yaml value "menu.replaces.selected" from "khskins.language" in {_lore}
 		replace "{state}" with yaml value "menu.replaces.select" from "khskins.language" in {_lore}
 		replace "{right-click}" with "" in {_lore}
-		make a gui slot {_slot} of {_p} with skull of "%loop-value%" parsed as offlineplayer without nbt named "&a%{_name}%" with lore replacer "\n" with "||" in {_lore} to run:
+		make a gui slot {_slot} of {_p} with skull of "%loop-value%" parsed as offlineplayer without nbt named "&a%{_loop}%" with lore replacer "\n" with "||" in {_lore} to run:
 			"%click type%" contains "RIGHT":
-				{_loop} is not uuid of {_p}
+				{_loop} is not {_p}' displayname
 				yml value "%uuid of {_p}%.selected" from file "plugins/KhSkins/players/%{_p}%.yml" is {_loop}:
 					make {_p} execute command "skin %{_p}'s displayname%"
-				remove {_loop} from yaml list "%uuid of {_p}%.skins" from file "plugins/KhSkins/players/%{_p}%.yml"
+				remove "%{_loop}%" from yaml list "%uuid of {_p}%.skins" from file "plugins/KhSkins/players/%{_p}%.yml"
 				make {_p} execute command "skin"
 			else:
-				make {_p} execute command "skin %{_loop} parsed as offlineplayer%"
+				make {_p} execute command "skin %{_loop}%"
 				close {_p}'s inventory
 		add 1 to {_slot}
 		{_slot} is 17 or 26:
@@ -132,8 +131,8 @@ function khskins_getStats(p: player):
 	file "plugins/KhSkins/players/%{_p}%.yml" doesn't exist:
 		create file "plugins/KhSkins/players/%{_p}%.yml"
 		set yml value "%uuid of {_p}%.name" of file "plugins/KhSkins/players/%{_p}%.yml" to {_p}'s displayname
-		set yml value "%uuid of {_p}%.selected" of file "plugins/KhSkins/players/%{_p}%.yml" to uuid of {_p}
-		add uuid of {_p} to yaml list "%uuid of {_p}%.skins" from file "plugins/KhSkins/players/%{_p}%.yml"
+		set yml value "%uuid of {_p}%.selected" of file "plugins/KhSkins/players/%{_p}%.yml" to {_p}'s displayname
+		add {_p}'s displayname to yaml list "%uuid of {_p}%.skins" from file "plugins/KhSkins/players/%{_p}%.yml"
 function khskins_ext(p: player, cmd: text):
 	{_cmd} contains "SKIN>":
 		set {_temp::*} to {_cmd} split at "SKIN>"
