@@ -12,12 +12,33 @@
 options:
 #	Nome: KhSkins | Autor: Kick Holse
 	version: 1.0
-
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── #
 # events
+join:
+	khcore_notifyUpdate(player, "KhSkins", "khskins", "90189", "{@version}", "khskins atualizar")
+quit:
+	delete {khskins_p::chat::%player%}
+chat:
+	{khskins_p::chat::%player%} is true:
+		cancel event
+		delete {khskins_p::chat::%player%}
+		message is "cancelar" or "cancel":
+			send yaml value "messages.command.skin.event_cancelled" from "khskins.language"
+		else:
+			make player execute command "skin %message%"
 
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── #
 # commands
+command khskins [<text = help>]:
+	permission: khskins.*
+	permission message: §3[KhSkins] §7v{@version} §f- §7Criado por §6Kick Holse§7.
+	trigger:
+		arg 1 == "help":
+			send "%nl%&e  Ajuda - KhSkins 1/1%nl% "
+			send "&3 /skin &f- &7Comando princpal"
+			send "&3 /khskins atualizar &f- &7Atualiza o skript%nl% "
+		arg 1 == "atualizar":
+			khcore update player {khskins::check_update} "KhSkins" script
 command skin [<text>]:
 	trigger:
 		arg 1 is not set:
@@ -26,28 +47,31 @@ command skin [<text>]:
 			khskins_paggedMenu(player, {_skins::*})
 		arg 1 is set
 		arg 1 is "help" or "ajuda":
-			send "%nl%  &eAjuda - Skin 1/1%nl% "
-			send " &3/skin atualizar &f- &7Retomar skin original da sua conta"
-			send " &3/skin <jogador> &f- &7Utilizar a skin de outro jogador%nl% "
+			loop skutil yaml list "messages.command.help" from file "plugins/KhSkins/language.yml":
+				send "%loop-value%"
 		else if arg 1 is "update" or "atualizar":
 			close player's inventory
-			send "&aSua skin foi atualizada com sucesso."
+			send yaml value "messages.command.skin.updated" from "khskins.language"
 			make console execute command "sr set %player% %player%"
 			set yaml value "%uuid of player%.selected" of file "plugins/KhSkins/players/%player%.yml" to uuid of player
 		else if khskins_verifyPlayer(arg 1 parsed as offlineplayer) is true:
 			set {_player} to khskins_getPlayerName(arg 1 parsed as offlineplayer) parsed as offlineplayer
-			send "&aSua skin foi alterada para %{_player}%"
+			set {_x} to yaml value "messages.command.skin.change" from "khskins.language"
+			{roleName.%{_player}%} is set:
+				replace "{nick}" with khcore_roles_getColored({_player}) in {_x}
+			replace "{nick}" with "%{_player}%" in {_x}
+			send {_x}
 			make console execute command "sr set %player% %{_player}%"
 			set yaml value "%uuid of player%.selected" of file "plugins/KhSkins/players/%player%.yml" to uuid of {_player}
 			khcore_listContains(yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%player%.yml", uuid of {_player}) is not true:
 				add uuid of {_player} to yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%player%.yml"
 		else:
-			send "&cNão encontramos nenhum jogador com este nick."
+			send yaml value "messages.command.skin.not_found" from "khskins.language"
 		
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── #
 # filemanager
 function khskins_filemanager():
-	khcore downgit "KhSkins/language.yml" "https://raw.githubusercontent.com/KickHolse/KhKits/master/files/locations"
+	khcore downgit "KhSkins/language.yml" "https://raw.githubusercontent.com/KickHolse/KhSkins/main/files/language"
 	loop currently loaded yaml files:
 		loop-value contains "khskins.language"
 		unload yaml loop-value
@@ -59,7 +83,7 @@ function khskins_paggedMenu(p: player, var: objects, page: number = 0):
 	set {_pageStart} to 21*{_page}
 	set {_i} to 1
 	set {_slot} to 10
-	open chest inventory with 6 rows named "Skins" to {_p}
+	open chest inventory with 6 rows named yaml value "menu.title" from "khskins.language" to {_p}
 	wait a tick
 	loop skutil yaml nodes "menu.items" from file "plugins/KhSkins/language.yml":
 		set {_item} to yaml value "menu.items.%loop-value%.icon" from "khskins.language"
@@ -76,13 +100,16 @@ function khskins_paggedMenu(p: player, var: objects, page: number = 0):
 		(loop-index parsed as integer) > {_pageStart}
 		set {_loop} to loop-value
 		set {_name} to "%loop-value%" parsed as offlineplayer
-		set {_lore} to "&7Passeie pelos nossos lobbies||&7utilizando a skin de %{_name}%.||||&eClique direito para remover.||{state}"
+		set {_lore} to replacer "{nick}" with "%{_name}%" in yaml value "menu.lore" from "khskins.language"
+		{_loop} is not uuid of {_p}:
+			replace "{right-click}" with yaml value "menu.replaces.right-click" from "khskins.language" in {_lore}
 		yml value "%uuid of {_p}%.selected" from file "plugins/KhSkins/players/%{_p}%.yml" is loop-value:
-			replace "{state}" with "&6Selecionado." in {_lore}
-		replace "{state}" with "&eClique para selecionar." in {_lore}
-		make a gui slot {_slot} of {_p} with skull of "%loop-value%" parsed as offlineplayer without nbt named "&a%{_name}%" with lore {_lore} to run:
+			replace "{state}" with yaml value "menu.replaces.selected" from "khskins.language" in {_lore}
+		replace "{state}" with yaml value "menu.replaces.select" from "khskins.language" in {_lore}
+		replace "{right-click}" with "" in {_lore}
+		make a gui slot {_slot} of {_p} with skull of "%loop-value%" parsed as offlineplayer without nbt named "&a%{_name}%" with lore replacer "\n" with "||" in {_lore} to run:
 			"%click type%" contains "RIGHT":
-				{_loop} is not {_p}'s displayname
+				{_loop} is not uuid of {_p}
 				yml value "%uuid of {_p}%.selected" from file "plugins/KhSkins/players/%{_p}%.yml" is {_loop}:
 					make {_p} execute command "skin %{_p}'s displayname%"
 				remove {_loop} from yaml list "%uuid of {_p}%.skins" from file "plugins/KhSkins/players/%{_p}%.yml"
@@ -96,10 +123,10 @@ function khskins_paggedMenu(p: player, var: objects, page: number = 0):
 		if {_slot} = ((35*{_i})):
 			exit loop
 	if (amount of {_var::*}) > {_pageStart} + 21:
-		make a gui slot 26 of {_p} with arrow named "&aPróxima página" with lore "&7Ir para a página %{_page} + 1 + 1%." to run:
+		make a gui slot 26 of {_p} with arrow named khcore_getName(yaml value "options.pagged.next_page" from "khskins.language") with lore replacer "{next_page}" with "%{_page} + 1 + 1%" in khcore_getLore(yaml value "options.pagged.next_page" from "khskins.language") to run:
 			khskins_paggedMenu({_p}, {_var::*}, ({_page} + 1))
 	if {_page} > 0:
-		make a gui slot 18 of {_p} with arrow named "&aPágina anterior" with lore "&7Voltar à página %{_page} + 1 - 1%." to run:
+		make a gui slot 18 of {_p} with arrow named khcore_getName(yaml value "options.pagged.previous_page" from "khskins.language") with lore replacer "{previous_page}" with "%{_page} + 1 - 1%" in khcore_getLore(yaml value "options.pagged.previous_page" from "khskins.language") to run:
 			khskins_paggedMenu({_p}, {_var::*}, ({_page} - 1))
 function khskins_getStats(p: player):
 	file "plugins/KhSkins/players/%{_p}%.yml" doesn't exist:
@@ -112,8 +139,10 @@ function khskins_ext(p: player, cmd: text):
 		set {_temp::*} to {_cmd} split at "SKIN>"
 		make {_p} execute command "skin %{_temp::2}%"
 		close {_p}'s inventory
-	{_cmd} contains "NONE":
-		khcore_playSound({_p}, ENDERMAN_TELEPORT, 1, 5)
+	{_cmd} contains "chat":
+		close {_p}'s inventory
+		send replacer "\n" with newline in yaml value "messages.command.skin.event" from "khskins.language" to {_p}
+		set {khskins_p::chat::%{_p}%} to true
 function khskins_getPlayerName(p: offlineplayer) :: text:
 	set {_x::*} to text from "https://api.mojang.com/users/profiles/minecraft/%{_p}%" split at """"
 	return {_x::4}
@@ -129,7 +158,7 @@ load:
 	khskins_filemanager()
 	delete {khskins::check_update}
 	wait 1 second
-	text from "https://api.spigotmc.org/legacy/update.php?resource=68835" != "{@version}":
+	text from "https://api.spigotmc.org/legacy/update.php?resource=90189" != "{@version}":
 		set {khskins::check_update} to true
 		send "&3[KHSKINS] &cYou are not using the latest version of skript" to console
 	else:
