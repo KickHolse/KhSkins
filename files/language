@@ -1,11 +1,36 @@
+# Skript feito por Kick Holse
+# Discord: https://www.kskripts.tk/discord
+
+options:
+  pagged:
+    next_page: 'item>ARROW : nome>&aPróxima página : desc>&7Ir para a página {next_page}.'
+    previous_page: 'item>ARROW : nome>&aPágina anterior : desc>&7Voltar à página {previous_page}.'
+messages:
+  command:
+    skin:
+      change: '&aSua skin foi alterada para a de &7{nick}&a.'
+      updated: '&aSua skin foi atualizada com sucesso.'
+      not_found: '&cNão encontramos nenhum jogador com este nick.'
+      event: ' \n&a Digite o nick da skin que você deseja no chat.\n&7 Ou digite &ccancelar &7para cancelar essa operação.\n '
+      event_cancelled: '&cMudança de skin cancelada.'
+    help:
+    - ''
+    - '  &eAjuda - Skin 1/1'
+    - ''
+    - ' &3/skin atualizar &f- &7Retomar skin original da sua conta'
+    - ' &3/skin <jogador> &f- &7Utilizar a skin de outro jogador'
+    - ''
 menu:
   title: 'Skins'
+  lore: '&7Passeie pelos nossos lobbies\n&7utilizando a skin de {nick}.\n\n{right-click}{state}'
   replaces:
-    select: '&eClique para selecionar este kit!'
+    selected: '&6Selecionada.'
+    select: '&eClique para selecionar.'
+    right-click: '&eClique direito para remover.\n'
   items:
     select:
       slot: 48
-      execute: 'SELECT>chat'
+      execute: 'chat'
       icon: 'item>BOOK_AND_QUILL : nome>&eEscolher uma nova skin : desc>&7Você pode escolher uma nova skin\n&7para ser utilizada em sua conta.\n\n&fComando &7/skin [nick]\n\n&aClique para escolher.'
     update:
       slot: 49
