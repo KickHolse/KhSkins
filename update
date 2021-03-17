@@ -11,11 +11,12 @@
 # ─────────────────────────────────────────────────── #
 options:
 #	Nome: KhSkins | Autor: Kick Holse
-	version: 1.1
+	version: 1.2
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── #
 # events
 join:
 	khcore_notifyUpdate(player, "KhSkins", "khskins", "90189", "{@version}", "khskins atualizar")
+	khskins_updateSkin(player)
 quit:
 	delete {khskins_p::chat::%player%}
 chat:
@@ -52,21 +53,28 @@ command skin [<text>]:
 		else if arg 1 is "update" or "atualizar":
 			close player's inventory
 			send yaml value "messages.command.skin.updated" from "khskins.language"
-			make console execute command "sr set %player% %player%"
-			set yaml value "%uuid of player%.selected" of file "plugins/KhSkins/players/%player%.yml" to player's displayname
+			khskins_verifyPlayer(player) is true:
+				make console execute command "sr set %player% %player%"
+				set yaml value "%uuid of player%.selected" of file "plugins/KhSkins/players/%player%.yml" to player's displayname
+			else:
+				khskins_updateSkin(player)
 		else if khskins_verifyPlayer(arg 1 parsed as offlineplayer) is true:
 			set {_player} to khskins_getPlayerName(arg 1 parsed as offlineplayer) parsed as offlineplayer
 			set {_x} to yaml value "messages.command.skin.change" from "khskins.language"
 			{roleName.%{_player}%} is set:
 				replace "{nick}" with khcore_roles_getColored({_player}) in {_x}
 			replace "{nick}" with "%{_player}%" in {_x}
-			send {_x}
+			{_player} is not player:
+				send {_x}
 			make console execute command "sr set %player% %{_player}%"
 			set yaml value "%uuid of player%.selected" of file "plugins/KhSkins/players/%player%.yml" to "%{_player}%"
 			khcore_listContains(yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%player%.yml", "%{_player}%") is not true:
 				add "%{_player}%" to yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%player%.yml"
 		else:
-			send yaml value "messages.command.skin.not_found" from "khskins.language"
+			arg 1 parsed as offlineplayer is player:
+				khskins_updateSkin(player)
+			else:
+				send yaml value "messages.command.skin.not_found" from "khskins.language"
 		
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── #
 # filemanager
@@ -150,6 +158,16 @@ function khskins_verifyPlayer(p: offlineplayer) :: boolean:
 		return false
 	else:
 		return true
+function khskins_updateSkin(p: player):
+	khskins_getStats({_p})
+	set {_skin} to yml value "%uuid of {_p}%.selected" of file "plugins/KhSkins/players/%{_p}%.yml"
+	khskins_verifyPlayer({_p}) is true:
+		{_skin} is not {_p}'s displayname
+		set {_skin} to yml value "%uuid of {_p}%.selected" of file "plugins/KhSkins/players/%{_p}%.yml"
+		make console execute command "sr set %{_p}% %{_skin}%"
+	else:
+		set yaml value "%uuid of {_p}%.selected" of file "plugins/KhSkins/players/%{_p}%.yml" to {_p}'s displayname
+		make console execute command replacer "{skin}" with yaml value "options.default_skin" from "khskins.language" in "sr set %{_p}% {skin}"
 
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── #
 # load
