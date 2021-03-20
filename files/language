@@ -2,7 +2,7 @@
 # Discord: https://www.kskripts.tk/discord
 
 options:
-  default_skin: 'memo4710'
+  default_skin: 'bayraktar'
   pagged:
     next_page: 'item>ARROW : nome>&aPróxima página : desc>&7Ir para a página {next_page}.'
     previous_page: 'item>ARROW : nome>&aPágina anterior : desc>&7Voltar à página {previous_page}.'
