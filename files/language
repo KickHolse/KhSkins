@@ -36,7 +36,7 @@ menu:
     update:
       slot: 49
       execute: 'SKIN>update'
-      icon: 'item>BARRIER : nome>&eAtualizar skin : desc>&7Isso irá restaurar a sua skin para a\n&7skin utilizada em sua conta do Minecraft.\n&7Caso você não possua uma conta, ficará\n&7com a skin padrão de nossa rede.\n\n&fComando: &7/skin atualizar\n\n&aClique para atualizar.'
+      icon: 'item>BARRIER : nome>&eAtualizar skin : desc>&7Isso irá restaurar a sua skin para a\n&7skin utilizada em sua conta do Minecraft.\n&7Caso você não possua uma conta, ficará\n&7com a skin padrão de nossa rede.\n\n&8Caso você utilize minecraft pirata\n&8sua skin será padronizada!\n\n&fComando: &7/skin atualizar\n\n&aClique para atualizar.'
     help:
       slot: 50
       execute: 'SKIN>help'
