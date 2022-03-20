@@ -16,6 +16,7 @@ messages:
    change: '&aSua skin foi alterada com sucesso.'
    no_space: '&cVocê não tem espaço o suficiente para selecionar uma nova skin.'
    not_found: '&cNão encontramos este usuário no banco de dados da mojang.'
+   your_skin: '&cVocê não pode adicionar sua própria skin em sua lista de skins.'
    already_has: '&cVocê já tem esta skin em sua lista de skins.'
    no_permission: '&cVocê não pode utilizar uma skin por nick, utilize alguma de nossa biblioteca ou adquira vip para poder utilizar qualquer skin.'
 
@@ -26,7 +27,7 @@ menu:
   selected: '&eSkin selecionada.'
  icons:
   selected: 'HEAD:3 : 1 : dono>{skin} : nome>&a{skin} : desc>&fUsado pela última vez:\n&8 ➟ &aUtilizando agora!\n\n{state}'
-  select: 'HEAD:3 : 1 : dono>{skin} : nome>&a{skin} : desc>&7Altere a sua skin para a skin\n&7de {skin}.\n\n&fUsado pela última vez:\n&8 ➟ &avou fazer isso não.\n\n{state}'
+  select: 'HEAD:3 : 1 : dono>{skin} : nome>&a{skin} : desc>&7Altere a sua skin para a skin\n&7de {skin}.\n\n{state}'
  items:
   no_skins: 'ROSE_RED : 1 : nome>&cOps, há algo de errado! : desc>&7Aparentemente você não possui\n&7nenhuma skin, equipe alguma skin\n&7utilizando o comando &f/skin [nick]&7.'
   current_skin: 'HEAD:3 : 1 : dono>{skin} : nome>&aSkin atual : desc>&fSelecionada: &7{selected}\n&fGênero: &7{gende}\n\n&8Sua skin padrão será a da sua conta\n&8se você for um jogador original, caso\n&8contrário, sua skin padrão será a skin\n&8padrão do servidor.\n\n&e➟ Clique para redefinir sua skin.'
