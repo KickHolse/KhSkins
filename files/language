@@ -1,45 +1,34 @@
-# Skript feito por Kick Holse
-# Discord: https://www.kskripts.tk/discord
+# crafted by kick#0808
+# www.kskripts.tk
 
 options:
-  default_skin: '1ge'
-  pagged:
-    next_page: 'item>ARROW : nome>&aPróxima página : desc>&7Ir para a página {next_page}.'
-    previous_page: 'item>ARROW : nome>&aPágina anterior : desc>&7Voltar à página {previous_page}.'
+ default_skin: 'whereismykiss'
+ no_gender: 'Indefinido'
+ without_selected: 'Nenhuma'
+ pagged:
+  next_page: 'LIGHT_GREEN_DYE : 1 : nome>&aPróxima página : desc>&7Ir para a página {next_page}.'
+  previous_page: 'GRAY_DYE : 1 : nome>&aPágina anterior : desc>&7Voltar à página {previous_page}.'
+  back: 'ROSE_RED : 1 : nome>&cVoltar'
+
 messages:
-  command:
-    skin:
-      change: '&aSua skin foi alterada para a de &7{nick}&a.'
-      updated: '&aSua skin foi atualizada com sucesso.'
-      not_found: '&cNão encontramos nenhum jogador com este nick.'
-      event: ' \n&a Digite o nick da skin que você deseja no chat.\n&7 Ou digite &ccancelar &7para cancelar essa operação.\n '
-      event_cancelled: '&cMudança de skin cancelada.'
-    help:
-    - ''
-    - '  &eAjuda - Skin 1/1'
-    - ''
-    - ' &3/skin atualizar &f- &7Retomar skin original da sua conta'
-    - ' &3/skin <jogador> &f- &7Utilizar a skin de outro jogador'
-    - ''
+ command:
+  skin:
+   change: '&aSua skin foi alterada com sucesso.'
+   no_space: '&cVocê não tem espaço o suficiente para selecionar uma nova skin.'
+   not_found: '&cNão encontramos este usuário no banco de dados da mojang.'
+   already_has: '&cVocê já tem esta skin em sua lista de skins.'
+   no_permission: '&cVocê não pode utilizar uma skin por nick, utilize alguma de nossa biblioteca ou adquira vip para poder utilizar qualquer skin.'
+
 menu:
-  title: 'Skins'
-  lore: '&7Passeie pelos nossos lobbies\n&7utilizando a skin de {nick}.\n\n{right-click}{state}'
-  replaces:
-    selected: '&6Selecionada.'
-    select: '&eClique para selecionar.'
-    right-click: '&eClique direito para remover.\n'
-  items:
-    select:
-      slot: 48
-      execute: 'chat'
-      icon: 'item>BOOK_AND_QUILL : nome>&eEscolher uma nova skin : desc>&7Você pode escolher uma nova skin\n&7para ser utilizada em sua conta.\n\n&fComando &7/skin [nick]\n\n&aClique para escolher.'
-    update:
-      slot: 49
-      execute: 'SKIN>update'
-      icon: 'item>BARRIER : nome>&eAtualizar skin : desc>&7Isso irá restaurar a sua skin para a\n&7skin utilizada em sua conta do Minecraft.\n&7Caso você não possua uma conta, ficará\n&7com a skin padrão de nossa rede.\n\n&8Caso você utilize minecraft pirata\n&8sua skin será padronizada!\n\n&fComando: &7/skin atualizar\n\n&aClique para atualizar.'
-    help:
-      slot: 50
-      execute: 'SKIN>help'
-      ownerid: '11d8b86f-8c1c-4a47-bc34-26dba4640a5c'
-      value: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzY0MTY4MmY0MzYwNmM1YzlhZDI2YmM3ZWE4YTMwZWU0NzU0N2M5ZGZkM2M2Y2RhNDllMWMxYTI4MTZjZjBiYSJ9fX0='
-      icon: 'item>HEAD:nbt={value} : nome>&eAjuda : desc>&7As ações disponíveis neste menu\n&7também podem ser realizadas por\n&7comando.\n\n&fComando: &7/skin ajuda\n\n&aClique para listar os comandos.'
+ title: 'Minhas Skins'
+ replaces:
+  select: '&eClique para utilizar esta skin.\n&eClique direito para deletar esta skin.'
+  selected: '&eSkin selecionada.'
+ icons:
+  selected: 'HEAD:3 : 1 : dono>{skin} : nome>&a{skin} : desc>&fUsado pela última vez:\n&8 ➟ &aUtilizando agora!\n\n{state}'
+  select: 'HEAD:3 : 1 : dono>{skin} : nome>&a{skin} : desc>&7Altere a sua skin para a skin\n&7de {skin}.\n\n&fUsado pela última vez:\n&8 ➟ &avou fazer isso não.\n\n{state}'
+ items:
+  no_skins: 'ROSE_RED : 1 : nome>&cOps, há algo de errado! : desc>&7Aparentemente você não possui\n&7nenhuma skin, equipe alguma skin\n&7utilizando o comando &f/skin [nick]&7.'
+  current_skin: 'HEAD:3 : 1 : dono>{skin} : nome>&aSkin atual : desc>&fSelecionada: &7{selected}\n&fGênero: &7{gende}\n\n&8Sua skin padrão será a da sua conta\n&8se você for um jogador original, caso\n&8contrário, sua skin padrão será a skin\n&8padrão do servidor.\n\n&e➟ Clique para redefinir sua skin.'
+  update: 'BARRIER : 1 : nome>&aAtualizar skin : desc>&7Atualize a skin que você está\n&7utilizando.\n\n&e➟ Clique para atualizar.'
+  library: 'BOOK : 1 : nome>&aBiblioteca de Skins : desc>&7Confira nossa biblioteca de skins\n&7customizadas disponíveis gratuitamente.\n\n&e➟ Clique para navegar.'
