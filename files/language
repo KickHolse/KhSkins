@@ -2,34 +2,34 @@
 # www.kskripts.tk
 
 options:
- default_skin: 'whereismykiss'
- no_gender: 'Indefinido'
- without_selected: 'Nenhuma'
- pagged:
-  next_page: 'LIGHT_GREEN_DYE : 1 : nome>&aPróxima página : desc>&7Ir para a página {next_page}.'
-  previous_page: 'GRAY_DYE : 1 : nome>&aPágina anterior : desc>&7Voltar à página {previous_page}.'
-  back: 'ROSE_RED : 1 : nome>&cVoltar'
+  default_skin: 'whereismykiss'
+  no_gender: 'Undefined'
+  without_selected: 'None'
+  pagged:
+    next_page: 'LIGHT_GREEN_DYE : 1 : nome>&aNext page : desc>&7Go to page {next_page}.'
+    previous_page: 'GRAY_DYE : 1 : nome>&aPrevious page : desc>&7Back to page {previous_page}.'
+    back: 'ROSE_RED : 1 : nome>&cCome back'
 
 messages:
- command:
-  skin:
-   change: '&aSua skin foi alterada com sucesso.'
-   no_space: '&cVocê não tem espaço o suficiente para selecionar uma nova skin.'
-   not_found: '&cNão encontramos este usuário no banco de dados da mojang.'
-   your_skin: '&cVocê não pode adicionar sua própria skin em sua lista de skins.'
-   already_has: '&cVocê já tem esta skin em sua lista de skins.'
-   no_permission: '&cVocê não pode utilizar uma skin por nick, utilize alguma de nossa biblioteca ou adquira vip para poder utilizar qualquer skin.'
+  command:
+    skin:
+      change: '&aYour skin has been successfully changed.'
+      no_space: '&cYou don''t have enough space to select a new skin.'
+      not_found: '&cWe couldn''t find this user in the mojang database.'
+      your_skin: '&cYou cannot add your own skin to your skin list.'
+      already_has: '&cYou already have this skin in your skins list.'
+      no_permission: '&cYou cannot use one skin per nick, use any of our library or buy vip to be able to use any skin.'
 
 menu:
- title: 'Minhas Skins'
- replaces:
-  select: '&eClique para utilizar esta skin.\n&eClique direito para deletar esta skin.'
-  selected: '&eSkin selecionada.'
- icons:
-  selected: 'HEAD:3 : 1 : dono>{skin} : nome>&a{skin} : desc>&fUsado pela última vez:\n&8 ➟ &aUtilizando agora!\n\n{state}'
-  select: 'HEAD:3 : 1 : dono>{skin} : nome>&a{skin} : desc>&7Altere a sua skin para a skin\n&7de {skin}.\n\n{state}'
- items:
-  no_skins: 'ROSE_RED : 1 : nome>&cOps, há algo de errado! : desc>&7Aparentemente você não possui\n&7nenhuma skin, equipe alguma skin\n&7utilizando o comando &f/skin [nick]&7.'
-  current_skin: 'HEAD:3 : 1 : dono>{skin} : nome>&aSkin atual : desc>&fSelecionada: &7{selected}\n&fGênero: &7{gende}\n\n&8Sua skin padrão será a da sua conta\n&8se você for um jogador original, caso\n&8contrário, sua skin padrão será a skin\n&8padrão do servidor.\n\n&e➟ Clique para redefinir sua skin.'
-  update: 'BARRIER : 1 : nome>&aAtualizar skin : desc>&7Atualize a skin que você está\n&7utilizando.\n\n&e➟ Clique para atualizar.'
-  library: 'BOOK : 1 : nome>&aBiblioteca de Skins : desc>&7Confira nossa biblioteca de skins\n&7customizadas disponíveis gratuitamente.\n\n&e➟ Clique para navegar.'
+  title: 'My skins'
+  replaces:
+    select: '&eClick to use this skin.\n&eRight click to delete this skin.'
+    selected: '&6Skin selected.'
+  icons:
+    selected: 'HEAD:3 : 1 : dono>{skin} : nome>&a{skin} : desc>&fLast used:\n&8 ➟ &aUsing now!\n\n{state}'
+    select: 'HEAD:3 : 1 : dono>{skin} : nome>&a{skin} : desc>&7Change your skin to {skin}''s\n&7skin.\n\n&fLast used:\n&8 ➟ &aComing soon\n\n{state}'
+  items:
+    no_skins: 'ROSE_RED : 1 : nome>&cOops, something is wrong! : desc>&7Apparently you don''t have any\n&7skin, equip some skin using the\n&7&f/skin [nick]&7 command.'
+    current_skin: 'HEAD:3 : 1 : dono>{skin} : nome>&aCurrent skin : desc>&fSelected: &7{selected}\n&fGenre: &7{gende}\n\n&8Your default skin will be your account''s\n&8skin if you are an original player, otherwise\n&8your default skin will be the server''s \n&8default skin.\n\n&e➟ Click to reset your skin.'
+    update: 'BARRIER : 1 : nome>&aUpdate skin : desc>&7Update the skin you are using.\n\n&e➟ Click to update.'
+    library: 'BOOK : 1 : nome>&aSkin library : desc>&7Check out our library of custom\n&7skins available for free.\n\n&e➟ Click to browse.'
