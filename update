@@ -10,57 +10,8 @@
 #                   ░  ░         ░                    #
 # ─────────────────────────────────────────────────── #
 options:
-#	KhSkins | crafted by Kick Holse
-	version: 1.3
-# ─────────────────────────────────────────────────── #
-import:
-  java.io.File
-  java.net.URL
-  java.nio.file.Files
-  java.nio.file.Paths
-  java.nio.file.StandardCopyOption
-function deserializeItem(str: text, p: offlineplayer) :: material:
-	{_str} is "":
-		return air
-	set {_sp::*} to {_str} split at " : "
-	set {_item} to {_sp::1} parsed as material
-	{_item} is a head:
-		{_str} contains "dono>":
-			set {_owner::*} to {_str} split at "dono>"
-			set {_h} to {_owner::2}
-			set {_owner} to first element of {_h} split at " "
-			replace "{player}" with "%{_p}%" in {_owner}
-			set {_item} to {_owner} parsed as offlineplayer's skull
-	set {_amount} to {_sp::2} parsed as int
-	{_amount} > 1:
-		{_item}.setAmount({_amount})
-	loop {_str} split at " : ":
-		loop-value contains "nome>":
-			set {_name::*} to loop-value split at ">"
-			set {_name} to colored {_name::2}
-		loop-value contains "desc>":
-			set {_lore::*} to loop-value split at ">"
-			replace all "\n" in {_lore::2} with "||"
-			set {_lore} to colored {_lore::2}
-	{_name} is set:
-		set {_item} to {_item} named {_name}
-	{_lore} is set:
-		set {_item} to {_item} with lore {_lore}
-	return {_item}
-local expression replacer %texts% with %texts% in %text%:
-  return type: text
-  get:
-    set {_result} to expr-3
-    loop exprs-1:
-      add 1 to {_n}
-      replace all "%loop-value-1%" with ({_n}th element of exprs-2 ? "") in {_result}
-    return {_result}
-effect download from %string% to file %string%:
-	trigger:
-		set {_in} to new URL(expr-1).openStream()
-		Files.copy({_in}, Paths.get(expr-2) and StandardCopyOption)
-		{_in}.close()
-
+	KhSkins | crafted by Kick Holse
+	version: 1.4
 # ─────────────────────────────────────────────────── #
 join:
 	getStats(player)
@@ -77,16 +28,16 @@ command skin [<text=help>] [<text>] [<text>] [<text>]:
 						arg 4 is set:
 							getName(arg 2 parsed as offlineplayer) is not "khskins->cracked":
 								yaml list "skins" from file "plugins/KhSkins/library.yml" contains "%getName(arg 2 parsed as offlineplayer)% : %arg 4% : %arg 3%":
-									send "&cJá existe esta skin na biblioteca."
+									send "&cThis skin already exists in the library."
 								else:
 									add "%getName(arg 2 parsed as offlineplayer)% : %arg 4% : %arg 3%" to yaml list "skins" from file "plugins/KhSkins/library.yml"
-									send "&aSkin adicionada à biblioteca com sucesso."
+									send "&aSkin added to library successfully."
 							else:
-								send "&cNão encontramos este usuário no banco de dados da mojang."
+								send "&cWe couldn't find this user in the mojang database."
 						else:
-							send "&cUtilize /skin add [nick] [gênero] [nome]"
+							send "&cUse /skin add [nick] [genre] [name]"
 				else:
-					send "&cVocê não tem permissão para utilizar este comando."
+					send "&cYou are not allowed to use this command."
 			else:
 				player has permission "khskins.cmd.skin" or "khskins.cmd.*" or "khskins.*":
 					set {_skins::*} to yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%uuid of player%.yml"
@@ -102,7 +53,8 @@ command skin [<text=help>] [<text>] [<text>] [<text>]:
 									send yaml value "messages.command.skin.change" from "ks.skins.language"
 								else:
 									send yaml value "messages.command.skin.not_found" from "ks.skins.language"
-							send yaml value "messages.command.skin.your_skin" from "ks.skins.language"
+							else:
+								send yaml value "messages.command.skin.your_skin" from "ks.skins.language"
 					else:
 						send yaml value "messages.command.skin.no_space" from "ks.skins.language"
 				else:
@@ -228,26 +180,22 @@ function getName(p: offlineplayer) :: text:
 function getStats(p: player):
 	set {_u} to uuid of {_p}
 	set {_f} to "plugins/KhSkins/players/%{_u}%.yml"
-	set {_c} to new File({_f})
-	{_c}.notExists():
-		create file "%{_f}%"
-		set yaml value "%{_u}%.name" from file "%{_f}%" to {_p}
+	fileExists({_f}) is not true:
+		create file {_f}
+		set yaml value "%{_u}%.name" from file "%{_f}%" to {_p}'s display name
 		set yaml value "%{_u}%.select" from file "%{_f}%" to "none"
 		add "" to yaml list "%{_u}%.skins" from file "%{_f}%"
 		remove "" from yaml list "%{_u}%.skins" from file "%{_f}%"
 		getName({_p}) is "khskins->cracked":
-			make console execute "sr set %{_p}% whereismykiss"
+			make console execute replacer "{skin}" with yaml value "options.default_skin" from "ks.skins.language" in "sr set %{_p}% {skin}"
 
 # ─────────────────────────────────────────────────── #
 load:
 	loop "language" and "library":
-		set {_file} to new File("plugins/KhSkins/%loop-value%.yml")
-		{_file}.exists():
-			set {_x} to 0
-		else:
+		fileExists("plugins/KhSkins/%loop-value%.yml") != true:
 			create file "plugins/KhSkins/%loop-value%.yml"
 			delete file "plugins/KhSkins/%loop-value%.yml"
-			download from "https://raw.githubusercontent.com/KickHolse/KhSkins/main/files/%loop-value%" to file "plugins/KhSkins/%loop-value%.yml"
+			#download from "https://raw.githubusercontent.com/KickHolse/KhSkins/main/files/%loop-value%" to file "plugins/KhSkins/%loop-value%.yml"
 		yaml "ks.skins.%loop-value%" is loaded:
 			unload yaml "ks.skins.%loop-value%"
 		load yaml "plugins/KhSkins/%loop-value%.yml" as "ks.skins.%loop-value%"
