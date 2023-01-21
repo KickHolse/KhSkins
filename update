@@ -10,8 +10,8 @@
 #                   ░  ░         ░                    #
 # ─────────────────────────────────────────────────── #
 options:
-	KhSkins | crafted by Kick Holse
-	version: 1.4
+#	KhSkins | crafted by Kick Holse
+	version: 1.5
 # ─────────────────────────────────────────────────── #
 join:
 	getStats(player)
@@ -47,7 +47,17 @@ command skin [<text=help>] [<text>] [<text>] [<text>]:
 						else:
 							arg 1 is not "%player%":
 								getName(arg 1 parsed as offlineplayer) is not "khskins->cracked":
-									add getName(arg 1 parsed as offlineplayer) to yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%uuid of player%.yml"
+									set {_skins::*} to yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%uuid of player%.yml"
+									loop yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%uuid of player%.yml":
+										remove loop-value from yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%uuid of player%.yml"
+									loop {_skins::*}:
+										set {_x} to loop-value
+										loop-value contains "%getName(arg 1 parsed as offlineplayer)% | ":
+											set {_x} to "%loop-value% | %now%"
+										add {_x} to yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%uuid of player%.yml"
+
+
+									add "%getName(arg 1 parsed as offlineplayer)% | %now%" to yaml list "%uuid of player%.skins" from file "plugins/KhSkins/players/%uuid of player%.yml"
 									set yaml value "%uuid of player%.select" from file "plugins/KhSkins/players/%uuid of player%.yml" to getName(arg 1 parsed as offlineplayer)
 									make console execute command "sr set %player% %arg-1%"
 									send yaml value "messages.command.skin.change" from "ks.skins.language"
@@ -92,17 +102,29 @@ function menu(p: player, m: text="main"):
 		size of {_skins::*} > 0:
 			loop {_skins::*}:
 				set {_loop} to loop-value
+				set {_loop::*} to {_loop} split at " | "
+				set {_loop-2} to {_loop::2}
+				replace "%loop-value%" with {_loop::1} in {_loop}
 				{_loop} is not ""
 				{_selected} is {_loop}:
 					set {_x} to replacer "{skin}" and "{state}" with {_loop} and yaml value "menu.replaces.selected" from "ks.skins.language" in yaml value "menu.icons.selected" from "ks.skins.language"
 					make a gui slot {_slot} of {_p} with deserializeItem({_x}, {_p})
 				else:
-					set {_x} to replacer "{skin}" and "{state}" with {_loop} and yaml value "menu.replaces.select" from "ks.skins.language" in yaml value "menu.icons.select" from "ks.skins.language"
+					set {_x} to replacer "{used}" and "{skin}" and "{state}" with "%{_loop-2}%" and {_loop} and yaml value "menu.replaces.select" from "ks.skins.language" in yaml value "menu.icons.select" from "ks.skins.language"
 					make a gui slot {_slot} of {_p} with deserializeItem({_x}, {_p}) to run:
 						"%click type%" contains "RIGHT":
 							remove {_loop} from yaml list "%uuid of {_p}%.skins" from file "plugins/KhSkins/players/%uuid of {_p}%.yml"
 							menu({_p})
 						else:
+							set {_skins2::*} to yaml list "%uuid of {_p}%.skins" from file "plugins/KhSkins/players/%uuid of {_p}%.yml"
+							loop yaml list "%uuid of {_p}%.skins" from file "plugins/KhSkins/players/%uuid of {_p}%.yml":
+								remove loop-value-2 from yaml list "%uuid of {_p}%.skins" from file "plugins/KhSkins/players/%uuid of {_p}%.yml"
+							loop {_skins2::*}:
+								set {_x} to loop-value-2
+								loop-value-2 contains "%getName({_loop} parsed as offlineplayer)% | ":
+									set {_x} to "%getName({_loop} parsed as offlineplayer)% | %now%"
+								add {_x} to yaml list "%uuid of {_p}%.skins" from file "plugins/KhSkins/players/%uuid of {_p}%.yml"
+
 							set yaml value "%uuid of {_p}%.select" from file "plugins/KhSkins/players/%uuid of {_p}%.yml" to {_loop}
 							make console execute command "sr set %{_p}% %{_loop}%"
 							close {_p}'s inventory
@@ -195,7 +217,7 @@ load:
 		fileExists("plugins/KhSkins/%loop-value%.yml") != true:
 			create file "plugins/KhSkins/%loop-value%.yml"
 			delete file "plugins/KhSkins/%loop-value%.yml"
-			#download from "https://raw.githubusercontent.com/KickHolse/KhSkins/main/files/%loop-value%" to file "plugins/KhSkins/%loop-value%.yml"
+			download from "https://raw.githubusercontent.com/KickHolse/KhSkins/main/files/%loop-value%" to file "plugins/KhSkins/%loop-value%.yml"
 		yaml "ks.skins.%loop-value%" is loaded:
 			unload yaml "ks.skins.%loop-value%"
 		load yaml "plugins/KhSkins/%loop-value%.yml" as "ks.skins.%loop-value%"
