@@ -27,7 +27,7 @@ menu:
     selected: '&6Skin selected.'
   icons:
     selected: 'HEAD:3 : 1 : dono>{skin} : nome>&a{skin} : desc>&fLast used:\n&8 ➟ &aUsing now!\n\n{state}'
-    select: 'HEAD:3 : 1 : dono>{skin} : nome>&a{skin} : desc>&7Change your skin to {skin}''s\n&7skin.\n\n&fLast used:\n&8 ➟ &aComing soon\n\n{state}'
+    select: 'HEAD:3 : 1 : dono>{skin} : nome>&a{skin} : desc>&7Change your skin to {skin}''s\n&7skin.\n\n&fLast used:\n&8 ➟ &a{used}\n\n{state}'
   items:
     no_skins: 'ROSE_RED : 1 : nome>&cOops, something is wrong! : desc>&7Apparently you don''t have any\n&7skin, equip some skin using the\n&7&f/skin [nick]&7 command.'
     current_skin: 'HEAD:3 : 1 : dono>{skin} : nome>&aCurrent skin : desc>&fSelected: &7{selected}\n&fGenre: &7{gende}\n\n&8Your default skin will be your account''s\n&8skin if you are an original player, otherwise\n&8your default skin will be the server''s \n&8default skin.\n\n&e➟ Click to reset your skin.'
