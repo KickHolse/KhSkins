@@ -5,58 +5,463 @@
 # gend | gende of skin
 
 menu:
- title: 'Skin library'
- replaces:
-  select: '&e➟ Click to use this skin.'
-  selected: '&eSkin selected.'
- icon: 'HEAD:3 : 1 : dono>{skin} : nome>&a{name} : desc>&7Change your skin to {name}''s\n&7skin&7.\n\n&fGenre: &7{gende}\n\n{state}'
+  title: 'Skin library'
+  replaces:
+    select: '&e➟ Click to use this skin.'
+    selected: '&6Skin selected.'
+  icon: 'HEAD:3 : 1 : dono>{skin} : nome>&a{name} : desc>&7Change your skin to {name}''s\n&7skin&7.\n\n&fGenre: &7{gende}\n\n{state}'
+  category: 'HEAD:3 : 1 : dono>{skin} : nome>&6{name} : desc>&7Use some of the skins from the\n&7{name} category.\n\n&fSkins available ({size}):\n{list}\n\n&e➟ Click to browse.'
 
 skins:
-- 'whereismykiss : &6Alex Blinders : Feminine'
-- 'whereismynull : &6Casimiro : Male'
-- 'SasukeUchiha : Sasuke : Feminine'
-- 'MysticalFire128 : Sakura : Feminine'
-- 'BradrJonas : Saitama : Male'
-- 'Tlaoof : Luffy : Feminine'
-- 'Zer0_2 : Zero Two : Feminine'
-- '_All_Might : All Might : Male'
-- 'saskerrr21 : Midoriya : Male'
-- '_Slm : Todoroki : Feminine'
-- 'iXwin : Mitsuki : Male'
-- 'sharinganek : Obito : Male'
-- '_Aie_ : Kakashi : Male'
-- 'Zakharov : Jiraya : Male'
-- 'Tatsuumiii : Tatsumi : Feminine'
-- 'KI3 : Akame : Feminine'
-- 'CorruptedSoul03 : Venom : Male'
-- '6ixsauer : Homem de Ferro : Male'
-- '700c : Homem Aranha : Feminine'
-- '4171 : Naruto : Male'
-- 'Oyo_Boyo : Goku : Male'
-- 'Nezuko______Chan : Nezuko : Feminine'
-- 'Tanjxro_ : Tanjiro : Male'
-- 'triops04 : Arthur : Feminine'
-- 'PrepPandora7420 : Tom : Feminine'
-- 'skylaimsorry : Buzz Lightyear : Feminine'
-- 'UTWF : Patrick : Feminine'
-- 'Octo_Tentakel : Lula Molusco : Feminine'
-- '_Inwax2115 : Bob Esponja : Feminine'
-- 'BigBoyMJ : Sandy : Feminine'
-- 'ratfraction69 : Ratatouille : Feminine'
-- 'w6utr : Panico : Feminine'
-- 'Spreche : Frankenstein : Feminine'
-- 'szasfart : Minion : Feminine'
-- 'imcheatinglul : Ranger Vermelho : Feminine'
-- 'surves : Ranger Rosa : Feminine'
-- 'blmsikecuh345 : Ranger Roxa : Feminine'
-- 'Lomboll : Ranger Azul : Feminine'
-- 'GoogleXD : Ranger Verde : Feminine'
-- 'Saboady : Ranger Amarelo : Feminine'
-- 'crimb : Ranger Branco : Feminine'
-- 'ShadowHamsterKid : Ranger Preto : Feminine'
-- 'Happyzz : Pinguim Vermelho : Feminine'
-- '1H4 : Pinguim Rosa : Feminine'
-- 'XQII : Pinguim Azul : Feminine'
-- 'Igalore : Pinguim Ciano : Feminine'
-- 'BESTLEGITBMS : Pinguim Verde : Feminine'
-- 'G_Forcee : Pinguim Preto : Feminine'
+  casimiro:
+    name: 'Casimiro'
+    player: 'whereismynull'
+    gend: 'Male'
+  pocoyo:
+    name: 'Pocoyo'
+    player: 'Dxnilox'
+    gend: 'Feminine'
+  alex:
+    name: 'Alex''s family'
+    player: 'okiwizin'
+    packages:
+      alex:
+        name: 'Alex'
+        player: 'Aeenon'
+        gend: 'Feminine'
+      alexblinders:
+        name: 'Alex Blinders'
+        player: 'whereismykiss'
+        gend: 'Feminine'
+      alexswimmer:
+        name: 'Alex Swimmer'
+        player: 'apriol'
+        gend: 'Feminine'
+      alexpolice:
+        name: 'Alex Police'
+        player: 'Guilties'
+        gend: 'Feminine'
+      alexfarmer:
+        name: 'Alex Farmer'
+        player: 'uffe_'
+        gend: 'Feminine'
+      alexdoctor:
+        name: 'Alex Doctor'
+        player: 'LaxGy'
+        gend: 'Feminine'
+      alexradioactive:
+        name: 'Alex Radioactive'
+        player: 'clpotter1'
+        gend: 'Feminine'
+      alexbuilder:
+        name: 'Alex Builder'
+        player: '69MISELY'
+        gend: 'Feminine'
+      alexmc:
+        name: 'Alex McDonalds'
+        player: 'Alexisxrae'
+        gend: 'Feminine'
+      alexastronaut:
+        name: 'Alex Astronaut'
+        player: 'Got_HD'
+        gend: 'Feminine'
+      alexdino:
+        name: 'Alex Dino'
+        player: 'savaqes'
+        gend: 'Feminine'
+      alexdinogreen:
+        name: 'Alex Dino Green'
+        player: 'fletcher767'
+        gend: 'Feminine'
+      alexdragon:
+        name: 'Alex Dragon'
+        player: 'Pholiwis'
+        gend: 'Feminine'
+      alexsheik:
+        name: 'Alex Sheik'
+        player: 'relous'
+        gend: 'Feminine'
+      alexgangster:
+        name: 'Alex Gangstar'
+        player: 'MCsw4gl0rd'
+        gend: 'Feminine'
+      alexvampire:
+        name: 'Alex Vampire'
+        player: 'eluriel_'
+        gend: 'Feminine'
+      alexnun:
+        name: 'Alex Nun'
+        player: 'Voidexe'
+        gend: 'Feminine'
+      alexchristmas:
+        name: 'Alex Christmas'
+        player: 'Unknowable'
+        gend: 'Feminine'
+  naruto:
+    name: 'Naruto'
+    player: '4171'
+    packages:
+      naruto:
+        name: 'Naruto'
+        player: '4171'
+        gend: 'Male'
+      sasuke:
+        name: 'Sasuke'
+        player: 'SasukeUchiha'
+        gend: 'Feminine'
+      sakura:
+        name: 'Sakura'
+        player: 'MysticalFire128'
+        gend: 'Feminine'
+      hinata:
+        name: 'Hinata'
+        player: 'McDonaldsLove'
+        gend: 'Feminine'
+      kakashi:
+        name: 'Kakashi'
+        player: '_Aie_'
+        gend: 'Male'
+      obito:
+        name: 'Obito'
+        player: 'Resonancing'
+        gend: 'Male'
+      jiraya:
+        name: 'Jiraya'
+        player: 'DeceasedShinobi'
+        gend: 'Male'
+      boruto:
+        name: 'Boruto'
+        player: 'Eto11'
+        gend: 'Male'
+      sarada:
+        name: 'Sarada'
+        player: 'LoneAnime'
+        gend: 'Feminine'
+      mitsuki:
+        name: 'Mitsuki'
+        player: 'Xhannnah'
+        gend: 'Male'
+  dragonball:
+    name: 'Dragon Ball'
+    player: 'Oyo_Boyo'
+    packages:
+      goku:
+        name: 'Goku'
+        player: 'Oyo_Boyo'
+        gend: 'Male'
+  pokemon:
+    name: 'Pokémon'
+    player: 'SLURPlES'
+    packages:
+      pikachu:
+        name: 'Pikachu'
+        player: 'SLURPlES'
+        gend: 'Feminine'
+      charmander:
+        name: 'Charmander'
+        player: 'TheReaLToastDabs'
+        gend: 'Feminine'
+      Bulbasaur:
+        name: 'Bulbasaur'
+        player: 'TheRealOakerly'
+        gend: 'Feminine'
+  superheros:
+    name: 'Super Heros'
+    player: '6ixsauer'
+    packages:
+      ironman:
+        name: 'Iron Man'
+        player: '6ixsauer'
+        gend: 'Male'
+      spiderman:
+        name: 'Spider Man'
+        player: 'NellaWafer'
+        gend: 'Feminine'
+  spongebob:
+    name: 'Sponge Bob'
+    player: 'alp_king'
+    packages:
+      bob:
+        name: 'Sponge Bob'
+        player: 'alp_king'
+        gend: 'Feminine'
+      patrick:
+        name: 'Patrick Star'
+        player: 'UTWF'
+        gend: 'Feminine'
+      squidward:
+        name: 'Squidward Tentacles'
+        player: 'Octo_Tentakel'
+        gend: 'Feminine'
+      sandy:
+        name: 'Sandy'
+        player: 'BigBoyMJ'
+        gend: 'Feminine'
+  mariobros:
+    name: 'Mario Bros'
+    player: 'Xanthy'
+    packages:
+      mario:
+        name: 'Mario'
+        player: 'Xanthy'
+        gend: 'Feminine'
+      luigi:
+        name: 'Luigi'
+        player: 'welcometotues'
+        gend: 'Feminine'
+      yoshi:
+        name: 'Yoshi'
+        player: 'Quoient'
+        gend: 'Feminine'
+      toad:
+        name: 'Toad'
+        player: 'tooooooood'
+        gend: 'Feminine'
+  tomandjerry:
+    name: 'Tom and Jerry'
+    player: 'PrepPandora7420'
+    packages:
+      tom:
+        name: 'Tom'
+        player: 'PrepPandora7420'
+        gend: 'Feminine'
+      jerry:
+        name: 'Jerry'
+        player: '127584'
+        gend: 'Feminine'
+  adventuretime:
+    name: 'Adventure Time'
+    player: 'qEvylness'
+    packages:
+      fin:
+        name: 'Fin'
+        player: 'qEvylness'
+        gend: 'Feminine'
+      jake:
+        name: 'Jake'
+        player: 'Oreo313'
+        gend: 'Feminine'
+      bmo:
+        name: 'BMO'
+        player: 'Databasen'
+        gend: 'Feminine'
+  looneytunes:
+    name: 'Looney Tunes'
+    player: 'codumb'
+    packages:
+      bugsbunny:
+        name: 'Bugs Bunny'
+        player: 'codumb'
+        gend: 'Feminine'
+      daffyduck:
+        name: 'Daffy Duck'
+        player: 'dgo725'
+        gend: 'Feminine'
+      tweety:
+        name: 'Tweety'
+        player: 'earoonie'
+        gend: 'Feminine'
+      sykvester:
+        name: 'Sykvester'
+        player: 'maguccie'
+        gend: 'Feminine'
+      porkypig:
+        name: 'Porky Pig'
+        player: '8088'
+        gend: 'Feminine'
+  simpsons:
+    name: 'Simpsons'
+    player: 'RealWarrior8600'
+    packages:
+      homer:
+        name: 'Homer'
+        player: 'RealWarrior8600'
+        gend: 'Feminine'
+      marge:
+        name: 'Marge'
+        player: 'rhyennon'
+        gend: 'Feminine'
+      lisa:
+        name: 'Lisa'
+        player: 'CanIGetUhh'
+        gend: 'Feminine'
+      bart:
+        name: 'Bart'
+        player: 'Jakeypoosis'
+        gend: 'Feminine'
+      milhouse:
+        name: 'Milhouse'
+        player: 'REND_YT'
+        gend: 'Male'
+      nedflanders:
+        name: 'Ned Flanders'
+        player: 'xXFiregamerPr0Xx'
+        gend: 'Male'
+      seymourskinner:
+        name: 'Seymour Skinner'
+        player: 'ToxicFaith'
+        gend: 'Male'
+      wiggum:
+        name: 'Wiggum'
+        player: 'chef_wigan'
+        gend: 'Male'
+      krustytheclown:
+        name: 'Krusty The Clown'
+        player: 'chale'
+        gend: 'Male'
+  shrek:
+    name: 'Shrek'
+    player: 'GucciShoes'
+    packages:
+      shrek:
+        name: 'Shrek'
+        player: 'GucciShoes'
+        gend: 'Male'
+      pib:
+        name: 'Puss in Boots'
+        player: 'Vaipah'
+        gend: 'Feminine'
+  toystory:
+    name: 'Toy Story'
+    player: '4dx_'
+    packages:
+      buzzlightyear:
+        name: 'Buzz Lightyear'
+        player: 'Fedbed'
+        gend: 'Feminine'
+      lgm:
+        name: 'Little Green Men'
+        player: '4dx_'
+        gend: 'Feminine'
+  scoobydoo:
+    name: 'Scooby-Doo'
+    player: 'MrTibbz1'
+    packages:
+      scoobydoo:
+        name: 'Scooby-Doo'
+        player: 'MrTibbz1'
+        gend: 'Feminine'
+      shaggyrogers:
+        name: 'Shaggy Rogers'
+        player: 'Askayy__'
+        gend: 'Feminine'
+      velma:
+        name: 'Velma Dinkley'
+        player: 'DrabHoney'
+        gend: 'Feminine'
+      fred:
+        name: 'Fred Jones'
+        player: 'Demetrious69420'
+        gend: 'Male'
+      daphne:
+        name: 'Daphne Blake'
+        player: 'aisz_s'
+        gend: 'Feminine'
+  mickeyhouse:
+    name: 'Mickey''s house'
+    player: 'fiwss'
+    packages:
+      mickey:
+        name: 'Mickey'
+        player: 'fiwss'
+        gend: 'Feminine'
+      minnie:
+        name: 'Minnie'
+        player: 'ilyheneei'
+        gend: 'Feminine'
+      donald:
+        name: 'Donald Duck'
+        player: 'E5death'
+        gend: 'Feminine'
+  winniethepooh:
+    name: 'Winnie the Pooh'
+    player: 'LongT1meNoSee'
+    packages:
+      pooh:
+        name: 'Winnie the Pooh'
+        player: 'LongT1meNoSee'
+        gend: 'Feminine'
+      tigger:
+        name: 'Tigger'
+        player: 'XxDEATH_TIGERxX'
+        gend: 'Feminine'
+      donkey:
+        name: 'Eeyore Igor Donkey'
+        player: 'wheatseeds'
+        gend: 'Feminine'
+      piglet:
+        name: 'Piglet'
+        player: 'hamsrus'
+        gend: 'Feminine'
+  rangers:
+    name: 'Power Rangers'
+    player: 'imcheatinglul'
+    packages:
+      red:
+        name: 'Red'
+        player: 'imcheatinglul'
+        gend: 'Feminine'
+      pink:
+        name: 'Pink'
+        player: 'Zyluh'
+        gend: 'Feminine'
+      purple:
+        name: 'Purple'
+        player: 'blmsikecuh345'
+        gend: 'Feminine'
+      blue:
+        name: 'Blue'
+        player: 'j0sph'
+        gend: 'Feminine'
+      green:
+        name: 'Green'
+        player: 'GoogleXD'
+        gend: 'Feminine'
+      yellow:
+        name: 'Yellow'
+        player: 'ParkRangerSir_73'
+        gend: 'Feminine'
+      brown:
+        name: 'Brown'
+        player: 'okickzin_w'
+        gend: 'Feminine'
+      white:
+        name: 'White'
+        player: 'crimb'
+        gend: 'Feminine'
+      golden:
+        name: 'Golden'
+        player: 'Zenow_'
+        gend: 'Feminine'
+      black:
+        name: 'Black'
+        player: 'Playmat'
+        gend: 'Feminine'
+  penguin:
+    name: 'Penguin'
+    player: 'Hymel_'
+    packages:
+      red:
+        name: 'Red'
+        player: 'Hymel_'
+        gend: 'Feminine'
+      pink:
+        name: 'Pink'
+        player: '1H4'
+        gend: 'Feminine'
+      blue:
+        name: 'Blue'
+        player: 'TobyHasWood'
+        gend: 'Feminine'
+      cyan:
+        name: 'Cyan'
+        player: 'MeconiumMuncher'
+        gend: 'Feminine'
+      green:
+        name: 'Green'
+        player: 'Murphey'
+        gend: 'Feminine'
+      black:
+        name: 'Black'
+        player: 'G_Forcee'
+        gend: 'Feminine'
